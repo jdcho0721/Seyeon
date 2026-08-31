@@ -458,7 +458,7 @@
     }
 }
 
-         /* 영역별 반응형 배치 좌표 */
+         /* 영역별 반응형 배치 좌표 
          #cont-pavilion { left: 50%; top: 25%; width: 25%; height: 45%; }
          #cont-summit   { left: 30%; top: 10%; width: 30%; height: 40%; }
          #cont-honey    { left: 10%; top: 5%; width: 20%; height: 25%; }
@@ -467,9 +467,9 @@
          #cont-pine     { left: 0%; top: 20%; width: 30%; height: 50%; }
          #cont-bamboo   { left: 70%; top: 20%; width: 30%; height: 35%; }
          #cont-moon     { left: 25%; top: 60%; width: 50%; height: 50%; }
-         #cont-cerulean { left: 60%; top: 60%; width: 50%; height: 40%; }
-         #cont-water    { left: 30%; top: 80%; width: 80%; height: 20%; }
-         #cont-slowwater{ left: 30%; top: 80%; width: 80%; height: 20%; }
+         #cont-cerulean { left: 70%; top: 80%; width: 30%; height: 20%; }
+         #cont-water    { left: 30%; top: 80%; width: 40%; height: 20%; }
+        */
 
          @media (max-height: 600px) {
          .choice-card { padding: 10px; min-height: 80px; }
@@ -636,6 +636,10 @@ body, html {
  
 
       <div id="bg-image"></div>
+      <div id="depth-status" style="display:none; position:fixed; top:10px; right:10px; z-index:10050;
+           font-family:'DM Mono', monospace; font-size:0.75rem; color:#ffcc66;
+           background:rgba(0,0,0,0.6); border:1px solid rgba(255,204,102,0.4);
+           border-radius:4px; padding:4px 10px; pointer-events:none;">⚠ 카메라 연결 끊김 — 재연결 중...</div>
       <div id="info-btn">작품 정보 & 사용법</div>
       <div id="subtitle" class="subtitle-bar"></div>
 
@@ -782,10 +786,7 @@ body, html {
     <div id="desc-water" class="sr-only">끊임없이 흐르며 생명력을 전달하는 물입니다.</div>
 </div>
 
-<div id="cont-slowwater" class="vid-container" role="region" aria-label="잔잔한 물 영상">
-    <video id="vid-slowwater" class="bg-layer" loop playsinline muted aria-describedby="desc-slowwater"></video>
-    <div id="desc-slowwater" class="sr-only">천천히 흐르는 잔잔한 물의 풍경입니다.</div>
-</div>
+
 
       <!-- 초기 진입 오버레이 (단순화) -->
       <div id="stage-select-screen" role="main" aria-label="세연 사유의 손길 시작 화면" style="
@@ -857,11 +858,6 @@ body, html {
             aria-label="3단계 개척 — 나만의 세연의 길 만들기" role="tab" aria-selected="false">
             <span class="nav-num" aria-hidden="true">③</span>
             <span class="nav-label">개척</span>
-          </button>
-          <button class="nav-btn" data-stage="4" onclick="enterStage(4)"
-            aria-label="4단계 창작 — 나만의 세연정 게임 만들기" role="tab" aria-selected="false">
-            <span class="nav-num" aria-hidden="true">④</span>
-            <span class="nav-label">창작</span>
           </button>
         </div>
       </nav>
@@ -1160,27 +1156,6 @@ body, html {
         </div>
       </div>
 
-      <!-- ── 4단계 독립 레이어: 창작 ── -->
-      <div id="layer-4" class="stage-layer" style="background:#0a0208; z-index:22000; pointer-events:auto; overflow-y:auto; flex-direction:column; align-items:stretch;" role="main" aria-label="4단계: 창작">
-        <!-- 상단 헤더 -->
-        <div style="width:100%; padding:16px 20px; box-sizing:border-box;
-          display:flex; align-items:center; justify-content:space-between;
-          border-bottom:1px solid rgba(255,102,102,0.3); flex-shrink:0; position:sticky; top:0; background:#0a0208; z-index:2;">
-          <div>
-            <div style="color:#ff9999; font-size:0.82rem; letter-spacing:0.15em; margin-bottom:3px;" aria-label="네 번째 단계, 창작">④ 창작(創作)</div>
-            <div style="color:white; font-size:1.1rem; font-weight:bold;" role="heading" aria-level="1">나만의 세연정 게임 만들기</div>
-          </div>
-          <div style="display:flex; align-items:center; gap:10px;">
-            <div id="creator-progress-text" style="color:#ff6666; font-size:0.82rem;">단계 0 / 6</div>
-          </div>
-        </div>
-        <!-- 진행 바 -->
-        <div style="width:100%; height:3px; background:rgba(255,102,102,0.1); flex-shrink:0;">
-          <div id="creator-progress-bar" style="height:100%; background:#ff6666; width:0%; transition:width 0.6s ease;"></div>
-        </div>
-        <!-- 내용 영역 -->
-        <div id="creator-content" style="width:100%; max-width:660px; padding:24px 20px 90px; box-sizing:border-box; margin:0 auto;"></div>
-      </div>
       <div id="chatbot-toggle" aria-label="도슨트 챗봇 열기">?</div>
       <div id="chatbot-window">
          <div style="background:#00ffcc; color:black; padding:12px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
@@ -1222,7 +1197,7 @@ body, html {
          
              elements: {
                  pavilion: {
-                     x: [0.5, 0.75], y: [0.25, 0.7],
+                     x: [0.5, 0.8], y: [0.25, 0.7],
                      file: 'Sunrise_on_the_Stone_Bridge.mp4', vidId: 'vid-pavilion', contId: 'cont-pavilion', 
                      content: "마음을 씻어내는 곳, 세연정입니다. 이름 그대로 주변의 산과 물, 바위가 어우러진 경관이 티 없이 맑고 깨끗하여 보는 이의 정신을 맑게 깨워줍니다.", 
                      detail: "세연정 서곡: 세연정의 전체 색채 분포(진초록 송림, 남색 밤하늘, 황금빛 달)를 믹싱한 클래식 멜로디가 흐릅니다. 잔잔한 가야금의 단아한 선율 위로 보길도의 새벽 물소리를 얹어 자연의 숨결을 재현했습니다. 이어지는 첼로와 콘트라베이스의 낮은 레가토 선율이 중첩되며 세연정의 남색 연못과 진초록 송림이 가진 깊고 묵직한 에너지를 전달합니다. 고음역대의 바이올린의 서정적인 멜로디가 고조되매, 어둠을 뚫고 솟아오르는 황금빛 햇살과 따뜻한 나무의 질감을 밝고 화려한 화성으로 그려냅니다. 맑은 물에 마음의 먼지를 씻어내듯, 지금 이 선율 속에서 당신이 '가장 순수하게 회복하고 싶은 본연의 모습'은 무엇인가요?"
@@ -1234,49 +1209,49 @@ body, html {
                      detail: "청아한 플루트 선율과 서정적인 기타 반주가 어우러져 광활한 산맥의 청량함 coffee 동양적인 평온함을 그려냅니다. 맑은 공기가 느껴지는 이 소리 속에서 잠시 명상의 시간을 가져보세요. 가파른 절벽 위에서도 쉼 없이 소통을 이어갔던 도르래처럼, 당신의 삶에서 '고립된 순간에도 세상과 연결해 주는 소중한 끈'은 무엇인가요?"
                  },
                  peak: {
-                     x: [0, 0.45], y: [0.75, 1.0],
+                     x: [0, 0.3], y: [0.75, 1.0],
                      file: 'Stillness_of_the_Peak.mp4', vidId: 'vid-peak', contId: 'cont-peak', 
                      content: "꽃은 피는가 싶더니 금방 지고, 풀은 푸르러지는가 싶더니 이내 누렇게 변하는구나. 아마도 변하지 않는 단단함은 바위뿐인가 하노라. 고산은 이 바위를 혹약암이라고 불렀습니다. '뛰어오르기도 하고 혹은 연못에 머물기도 한다'는 그 이름처럼, 하늘로 솟구치기 전 온 힘을 응축한 용의 역동적인 기개가 서려 있습니다.", 
                      detail: "이 사운드는 거문고의 단호한 타격음과 첼로의 깊은 울림을 쌓아 올려, 흔들리지 않는 바위의 단단한 질감과 묵직한 안정감을 구현했습니다. 머무름과 뛰어오름 사이, 혹약암은 가장 적절한 때를 기다리고 있습니다. 서두르지 않고 당신의 때를 기다리게 하는 '단단한 인내'의 힘은 어디서 나오나요?"
                  },
                  water: {
-                     x: [0.4, 1.0], y: [0.8, 1.0],
+                     x: [0.4, 0.7], y: [0.8, 1.0],
                      file: 'The_Current_Beneath.mp4', vidId: 'vid-water', contId: 'cont-water', 
                      content: "구름 빛이 깨끗하다고는 하나 자주 검어지고, 바람 소리가 맑다고는 하나 그칠 때가 많구나. 깨끗하면서도 그치지 않고 끊임없이 흐르는 것은 오직 물뿐인가 하노라. ", 
                      detail: "은백색 달빛이 수면 위로 가만히 내려앉는 신비로운 찰나를 소리에 담았습니다. 펠트 피아노의 포근한 타건과 신시사이저의 잔향은 부서지는 윤슬의 빛깔을 투명하게 그려냅니다. 수면 위에서 찰나로 빛나는 '윤슬(FM 벨)'과 심연을 흐르는 '물의 깊이(첼로/패드)'가 만나 순간 속에 깃든 영원을 노래합니다. 쉼 없이 흐르되 스스로를 더럽히지 않는 저 물결처럼, 수많은 흔들림 속에서도 당신이 지켜내고 있는 '내면의 맑은 흐름'은 무엇입니까?"
                  },
                  valley: {
-                     x: [0.65, 1.0], y: [0.65, 1.0],
+                     x: [0.7, 0.85], y: [0.5, 0.8],
                      file: 'Weight_of_the_Valley.mp4', vidId: 'vid-valley', contId: 'cont-valley', 
                      content: "꽃은 피는가 싶더니 금방 지고, 풀은 푸르러지는가 싶더니 이내 누렇게 변하는구나. 아마도 변하지 않는 단단함은 바위뿐인가 하노라. 고산은 이 바위를 사투암이라고 불렀습니다. 활을 쏘는 발받침대라는 뜻을 넘어, 흐트러짐 없이 자신을 경계하며 선비의 기개를 닦았던 수련의 장이기도 합니다.", 
                      detail: "콘트라베이스의 깊은 저음은 수백 년간 제자리를 지켜온 바위의 압도적인 무게감을 형상화합니다. 바위의 완고하고도 묵직한 울림이 느껴지시나요? 세상의 변화에 휩쓸리지 않고 당신의 존재를 굳건히 지탱해 주는 '단단한 중심' 하나는 무엇입니까?"
                  },
                  pine: {
-                     x: [0, 0.35], y: [0.3, 0.6],
+                     x: [0, 0.4], y: [0.3, 0.6],
                      file: 'Boughs_of_Deep_Timber.mp4', vidId: 'vid-pine', contId: 'cont-pine',
                      content: "더우면 꽃 피고 추우면 잎 지거늘, 소나무야 너는 어찌 눈서리를 모르는가? 깊은 땅속까지 뿌리가 곧게 뻗어 있는 것을 그것을 보고 알겠노라. 수백 년의 시간을 품은 고산의 소나무입니다. 연못을 향해 낮게 가지를 늘어뜨린 채 세연정의 사계절을 굽어살피며 이곳의 역사와 함께해 왔습니다.",
                      detail: "오보에의 단단한 음색과 비올라의 중복된 선율은 짙푸른 솔잎의 묵직한 질감을 입체적으로 재현합니다. 중간 정도의 템포와 밀도 있는 음색을 통해 '사시사철 푸른 지조'를 표현합니다. 혹독한 눈보라 속에서도 끝내 푸름을 포기하지 않는 기개가 느껴지시나요? 삶의 겨울이 찾아왔을 때, 당신을 다시 일으켜 세우는 '푸른 의지의 뿌리'는 무엇입니까?"
                  },
                  bamboo: {
-                     x: [0.6, 1.0], y: [0.15, 0.5],
+                     x: [0.8, 1.0], y: [0.1, 0.7],
                      file: 'The_Verdant_Stalks.mp4', vidId: 'vid-bamboo', contId: 'cont-bamboo', 
                      content: "나무도 아닌 것이 풀도 아닌 것이, 곧기는 누가 시켰으며 속은 어찌 비어 있는가? 저렇게 사계절 내내 푸르니 나는 그것을 좋아하노라. 모진 바람에도 꺾이지 않는 유연함은 그 마디마디에 새겨진 비움의 증거입니다.", 
                      detail: "플루트의 맑은 고음역과 경쾌한 스타카토로 대나무 숲을 스치는 청량한 기운을 담아냈습니다. 바람에 흔들리는 대나무 잎의 '유연함'과 '청량한 연초록'을 표현합니다. 여백이 느껴지는 담백한 선율은 복잡한 마음을 잠시 쉬게 하는 휴식의 기표가 됩니다. 속을 비웠기에 오히려 하늘을 향해 곧게 뻗어 나가는 대나무처럼, 당신은 지금 무엇인가를 더 채우기보다 '비워냄으로써 얻는 진정한 자유'를 만끽하고 계신가요?"
                  },
                  honey: {
-                     x: [0.2, 0.4], y: [0.05, 0.3],
+                     x: [0.2, 0.5], y: [0.0, 0.2],
                      file: 'The_Honeyed_Hour.mp4', vidId: 'vid-honey', contId: 'cont-honey', 
                      content: "작은 것이 높이 떠서 만물을 다 비추니, 보고도 말 아니 하니 내 벗인가 하노라. ", 
                      detail: "청아한 플루트와 영롱한 첼레스타의 선율로 '노란색'이 가진 밝고 가벼운 입자감을 표현했습니다. 반짝이는 아르페지오 선율은 밤하늘 속에서 발산되는 달빛의 에너지를 시각화합니다. 맑고 높은 피치는 고명도의 빛을, 풍성한 홀 Reverb는 달빛이 정원 전체로 은은하게 퍼져나가는 공간감을 형상화합니다. 귓가에 머무는 이 소리가 마치 손바닥에 내려앉는 따스한 온기처럼 느껴지시나요? 어둠 속에서 말없이 세상을 비추는 달처럼, 당신도 누군가의 가장 어두운 시간에 '고요한 위로의 빛'이 되어주었던 적이 있나요?"
                  },
                  moon: {
-                     x: [0.25, 0.75], y: [0.6, 0.85],
+                     x: [0.25, 0.7], y: [0.6, 0.8],
                      file: 'Silver_Reflection_on_Water.mp4', vidId: 'vid-moon', contId: 'cont-moon', 
                      content: "물결 위에 일렁이는 달 그림자는 변치 않는 벗의 깊은 마음입니다. 잡힐 듯 잡히지 않는 그 빛은 수면과 하나가 되어 고요한 우정의 깊이를 증명합니다.", 
                      detail: "가야금의 부드러운 농현은 달의 침묵과 포용력을, 따뜻한 패드 사운드는 밤의 포근함을 담아냅니다. 여기에 맑은 벨 소리와 긴 잔향을 더해 수면에 잘게 부서지는 은백색 달빛의 유동적인 흐름을 청각화했습니다. 쉼 없이 흔들리는 물결 위에서도 빛을 잃지 않는 저 달처럼, 당신의 삶에서 '흔들림 속에서도 중심을 잡아주는 변치 않는 인연'은 누구인가요?"
                  },
                  cerulean: {
-                     x: [0.6, 0.9], y: [0.6, 0.8],
+                     x: [0.7, 1.0], y: [0.8, 1.0],
                      file: 'Cerulean_Glade.mp4', vidId: 'vid-cerulean', contId: 'cont-cerulean', 
                      content: "청록의 미학이 머무는 연못입니다. 세연정의 맑은 물줄기와 울창한 송림이 만나는 찰나의 빛깔을 '소리'라는 투명한 그릇에 정성껏 담아냈습니다.", 
                      detail: "테너 음역대의 첼로가 지닌 깊은 파란색과 목가적인 오보에의 싱그러운 초록빛이 화성으로 어우러져, 수면 위로 부서지는 청록의 고결한 빛을 재현합니다. 유려한 레가토 선율과 긴 잔향은 맑은 연못 아래 흐르는 '영원한 정중동'을 청각화합니다. 서로 다른 두 빛깔이 만나 하나의 아름다운 색을 이루듯, 당신의 삶에서 '서로 다른 가치들이 조화를 이루어 빚어낸 가장 아름다운 순간'은 언제였나요?"
@@ -2934,5 +2909,6 @@ function restartCreator() {
 
 
       </script>
+   <script src="depth_camera_injector.js"></script>
    </body>
 </html>
