@@ -187,5 +187,6 @@ pine: {
 ## 9. 저작권
 
 © 2026 Humartology (Jun Dong Cho). All Rights Reserved.
+jdcho@skku.edu
 
 이미지·사운드·영상 등 모든 콘텐츠의 무단 복제·배포를 금합니다.
